@@ -1,0 +1,42 @@
+@layer reset {
+    *{
+        margin: 0;
+        padding: 0;
+    }
+
+}
+
+@layer main-styles {
+    :root{
+        --clr-green: oklch(0.4506 0.0558 113.69);
+        --clr-tan: oklch(0.9307 0.0228 71.78);
+        --clr-brown-light: oklch(0.7142 0.0626 64.07);
+        --clr-brown: oklch(0.5181 0.0773 50.96);
+        --clr-brown-dark: oklch(0.3899 0.046 51.6);
+        --clr-red: oklch(0.4587 0.1836 22.79);
+
+        --font-f : "Inter", sans-serif;
+    }
+}
+
+:root{
+    font-family: var(--font-f);
+    color: var(--clr-brown-dark);
+    background-color: var(--clr-tan);
+}
+
+@layer layout {
+    main {
+        display: flex;
+        height: 100dvh;
+    }
+    .form {
+        flex: 1.2;
+    }
+    .hero{
+        flex: .8;
+        background-image: linear-gradient(to right,rgb(0 0 0 / 0) 70%, var(--clr-tan)),url("/assets/img/hero-01.png");
+        position: relative;
+        background-position: 20% 20%;
+    }
+}
