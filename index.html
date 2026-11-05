@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Monoton&display=swap"
         rel="stylesheet">
 </head>
 <body>
@@ -34,6 +34,7 @@
                             <rect x="17.027" y="35" width="2" height="2" />
                         </g>
                     </svg>
+                    <h1>OASIS</h1>
                     </div>
                     <div class="motto">
                         <p>This is not a real oasis. There is no water here.
@@ -45,44 +46,54 @@
                 </div>
             </div>
                 <form class="form-container" action="" method="post">
-                    <h1>WELCOME to <b>OASIS</b></h1>
+                    <h1 class="form-header">Get Started</h1>
                     <div class="form-top">
                         <div class="form-group">
                             <label for="fname">First Name</label>
-                            <input type="text" name="fname" id="fname" placeholder=" ">
+                            <input type="text" name="fname" id="fname" autocomplete="given-name" placeholder=" " required>
+                            <p class="error">This field is Required</p>
                         </div>
                         <div class="form-group">
                             <label for="lname">Last Name</label>
-                            <input type="text" name="lname" id="lname" placeholder=" ">
+                            <input type="text" name="lname" id="lname" autocomplete="family-name" placeholder=" " required>
+                            <p class="error">This field is Required</p>
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="email" placeholder=" ">
+                            <input type="email" name="email" id="email" autocomplete="email" placeholder=" " required>
+                            <p class="error">You prefer pigeon ?</p>
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone Number</label>
-                            <input type="tel" name="phone" id="phone" placeholder=" ">
+                            <input type="tel" name="phone" id="phone" autocomplete="tel" placeholder=" "required>
+                            <p class="error">Wrong Number</p>
                         </div>
 
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" name="password" id="pasword" placeholder=" ">
+                            <input type="password" name="password" id="password" minlength="8" autocomplete="new-password" placeholder=" " required>
+                            <p class="error">Wrong Pass</p>
                         </div>
                         <div class="form-group">
                             <label for="c-password">Confirm Password</label>
-                            <input type="password" name="c-password" id="c-pasword" placeholder=" ">
+                            <input type="password" name="c-password" minlength="8" id="c-password" placeholder=" " required>
+                            <p class="error">try again</p>
                         </div>
 
                     </div>
                     <div class="form-bottom">
                         <div class="consent">
                             <p>
-                                By signing up, you are agreeing to our <span>Terms & Conditions</span> and <span>Privacy Policy</span>
+                                By signing up, you are agreeing to our <a href="">Terms & Conditions</a> and <a href="">Privacy Policy</a>
                             </p>
                         </div>
-                        <button type="submit">Create Account</button>
-                        <p>Already have an account? <a href="">Log in</a></p>
+                        <div>
+                            <button type="submit">Create Account</button>
+                            <div>
+                                <p>Already have an account?</p><a href="">Log in</a>
+                            </div>
+                        </div>
                     </div>
                 </form>
 

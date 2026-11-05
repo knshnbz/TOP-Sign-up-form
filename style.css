@@ -17,8 +17,10 @@
         --clr-red: oklch(0.4587 0.1836 22.79);
 
         --font-f : "Inter", sans-serif;
-        --font-s-main : clamp(1rem, 0.65rem + 0.5vw, 1.8rem);
-        --font-s-h : clamp(1.5rem, 2rem + 1vw, 5rem);
+        --font-f-r : "Monoton", sans-serif;
+        --font-s-main:  clamp(1rem, 0.9rem + 0.4vw, 1.25rem);
+        --font-s-small: clamp(0.8rem, 0.75rem + 0.2vw, 0.95rem);
+        --font-s-h:     clamp(1.75rem, 1.2rem + 2.2vw, 3.5rem);
     }
 }
 
@@ -45,7 +47,7 @@
 
 @layer container{
     .container{
-        height: 80dvh;
+        height: min-content;
         flex: .8;
         display: flex;
         background: rgba(255, 255, 255, 0.5);
@@ -74,16 +76,16 @@
         background-image: url("assets/img/hero-01.png");
         background-size: cover;
         border-radius: 20px;
-        box-shadow: inset 0 8px 20px rgba(0, 0, 0, 0.3);
+        box-shadow: inset 0 16px 20px 10px rgba(255, 255, 255, 0.3), 0 8px 20px rgba(0, 0, 0, 0.3) ;
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-direction: column;
     }
     #logo{
-        stroke: var(--clr-brown);
+        stroke: var(--clr-green);
         stroke-miterlimit: 10;
-        stroke-width: .5px;
+        stroke-width: 0.8px;
         margin: 20px;
         width: 100px;
         fill: none;
@@ -93,6 +95,10 @@
         animation: draw 5s forwards;
     }
     @keyframes draw{to{stroke-dashoffset: 0;}}
+
+    .logo{
+        text-align: center;
+    }
 
     .motto {
         font-size: var(--font-s-main) ;
@@ -120,16 +126,25 @@
     }
 
     h1{
+        color: var(--clr-green);
         font-size: var(--font-s-h);
+        font-family: var(--font-f-r);
+        font-weight: 100;
+    }
+
+    .form-header{
+        font-family: var(--font-f);
+        font-weight: 900;
+        opacity: 0.8;
     }
 
     .form-top{
         display: flex;
         flex-direction: column;
-        gap: 4em;
+        gap: 2em;
         flex: 1;
-
-        justify-content: center;
+        margin: 2.5em 0;
+        justify-content: space-evenly;
     }
 
     input, label{
@@ -163,36 +178,53 @@
         font-family: inherit;
         background: 0;
         border: 0;
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid var(--clr-green);
+        border-top: 3px solid transparent;
         padding: 10px;
         color: var(--clr-brown-light);
-        z-index: 99;
     }
 
     .form-group:has(input:focus) label, .form-group:has(input:not(:placeholder-shown)) label  {
         translate: -0.75em -1.8em;
-        padding: 0.2em 0.2em 0.8em 0.2em;
+        padding: 0.2em 1em 0.2em 0.2em;
         scale: 0.8;
-        background: var(--clr-tan);
-        border-radius: 16px 16px 0 0;
+        background: var(--clr-green);
+        border-radius: 0 16px 0 0;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         border: 1px solid rgba(255, 255, 255, 0.3);
-        color: var(--clr-brown);
+        color: var(--clr-tan);
+
+        &::after{
+            right: 5px;
+            color: var(--clr-tan);
+        }
     }
 
         .form-group:has(input:focus) input, .form-group:has(input:not(:placeholder-shown)) input  {
-        background: var(--clr-tan);
-        border-radius: 16px;
-        box-shadow: inset 0 8px 20px rgba(0, 0, 0, 0.3);
-        backdrop-filter: blur(8.7px);
-        -webkit-backdrop-filter: blur(8.7px);
-        border: 2px solid var(--clr-tan);
+        box-sizing: border-box;
+        background: 0;
+        border-radius: 0 16px;
+        box-shadow: inset 0 2px 2px rgba(55, 55, 39, 0.3);
+        border: 2px solid var(--clr-green);
         color: var(--clr-brown);
         position: relative;
 
         &:invalid{
-            border: 2px solid rgba(255, 2, 2, 1);
+            border: 2px solid var(--clr-red);
         }
+    }
+
+    .error{
+        font-size: var(--font-s-small) ;
+        position: absolute;
+        right: 0;
+        bottom: -1.5em;
+        &::after{
+            content: " *";
+        }
+        font-weight: 400;
+        font-style: italic;
+        color: var(--clr-red);
     }
 
 
@@ -206,28 +238,63 @@
 
     .form-bottom{
         display: flex;
+        flex-direction: column;
         flex-wrap: wrap;
         gap: 10px;
-        align-items: flex-end;
+        font-weight: 200;
+        color: var(--clr-brown-dark);
+    }
+
+    .form-bottom > :last-child{
+            flex: 1;
+            display: flex;
+            gap: 1em;
+            & > * {
+                flex: 1;
+            }
+        }
+    
+    .form-bottom > div + div > div {
+        font-size: var(--font-s-small);
     }
 
     .consent{
         display: block;
-        font-weight: 200;
-        color: var(--clr-brown-dark);
+        font-size: var(--font-s-small);
+        
+        height: 2.2em;
     }
 
     button{
         font-size: var(--font-s-main);
         color: var(--clr-tan);
-        height: 2.8vw;
         padding: 0.8em 1.6em;
         width: 50%;
-        background-color: var(--clr-brown);
+        background-color: var(--clr-green);
         border-radius: 16px;
         border: 0;
+    }
+
+    a{
+        text-decoration: none;
+        font-weight: 400;
+        color: var(--clr-brown);
+        cursor: cell;
     }
     
 
 }
+    @media (max-width: 900px) {
+        .container{
+            flex-direction: column;
+            flex: .9;
+            padding: 15px;
+        }
+        .hero-image{
+            background-position: 25% 75%;
+        }
+        .form-container{
+            border-left: 0;
+        }
+    }
 
