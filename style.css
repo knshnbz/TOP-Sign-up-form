@@ -33,8 +33,7 @@
 @layer layout {
     main {
         display: flex;
-        height: 100dvh;
-        flex: 1;
+        min-height: 100dvh;
         background-image: url("assets/img/hero-02.png");
         position: relative;
         background-size: cover;
@@ -130,7 +129,40 @@
         font-size: var(--font-s-h);
         font-family: var(--font-f-r);
         font-weight: 100;
+        position: relative;
     }
+
+    .github-page > svg{
+        fill: var(--clr-green);
+        position: absolute;
+        overflow: visible;
+        right: 0;
+        top: 0.2em;
+        height: 80%;
+        stroke: white;
+        stroke-miterlimit: 1;
+        stroke-width: 0.5px;
+        cursor: alias;
+        stroke-linecap: round;
+        animation: stroke_color_anim 3s infinite;
+    }
+
+    @keyframes stroke_color_anim {
+        0% {
+            stroke: var(--clr-red);
+        }
+        50% {
+            stroke: black;
+        }
+        100% {
+            stroke: var(--clr-red);
+        }
+    }
+
+
+
+
+
 
     .form-header{
         font-family: var(--font-f);
@@ -138,13 +170,68 @@
         opacity: 0.8;
     }
 
-    .form-top{
+    .form-top , .password-inputs{
         display: flex;
         flex-direction: column;
         gap: 2em;
         flex: 1;
-        margin: 2.5em 0;
         justify-content: space-evenly;
+    }
+
+    .form-top{
+        margin: 2.5em 0;
+    }
+
+    .password-group{
+        display: flex;
+        gap: 2em;
+        position: relative;
+    }
+
+    .password-hints{
+    display: none;
+    opacity: 0;
+    translate: 1rem 0;
+    padding: 1em 2em;
+    font-size: var(--font-s-small);
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    transition: opacity 250ms ease, translate 250ms ease, display 250ms;
+    transition-behavior: allow-discrete;
+    }
+
+    .hints-list > li{
+        line-height: 1.6;
+        font-weight: 100;
+        color: var(--clr-red);
+        &::marker{
+            content: "○ ";
+            color: var(--clr-red);
+        }
+    }
+
+    .hints-list li.met {
+        color: var(--clr-green);
+        &::marker{
+            content: "✓ ";
+            color: var(--clr-green);
+        }
+    }
+
+    .password-group:has(input:focus) {
+        .password-hints {
+            display: block;
+            opacity: 1;
+            translate: 0;
+
+            @starting-style {
+                opacity: 0;
+                translate: 1rem 0;
+            }
+        }
     }
 
     input, label{
@@ -154,6 +241,10 @@
     input::placeholder{
         font-weight: 400;
         opacity: .5;
+    }
+
+    input:focus{
+        outline-color: var(--clr-tan);
     }
 
     label{
@@ -169,7 +260,7 @@
         &::after{
             content: "*";
             position: absolute;
-            right: -20px;
+            right: -1em;
             color: var(--clr-brown);
         }
     }
@@ -200,7 +291,7 @@
         }
     }
 
-        .form-group:has(input:focus) input, .form-group:has(input:not(:placeholder-shown)) input  {
+        .form-group:has(input:focus) input, .form-group:has(input:not(:placeholder-shown)) input, .form-group:has(input:user-invalid) input  {
         box-sizing: border-box;
         background: 0;
         border-radius: 0 16px;
@@ -209,7 +300,7 @@
         color: var(--clr-brown);
         position: relative;
 
-        &:invalid{
+        &:user-invalid{
             border: 2px solid var(--clr-red);
         }
     }
@@ -219,13 +310,14 @@
         position: absolute;
         right: 0;
         bottom: -1.5em;
-        &::after{
-            content: " *";
-        }
-        font-weight: 400;
+        font-weight: 200;
         font-style: italic;
         color: var(--clr-red);
+        display: none;
     }
+    .form-group:has(input:user-invalid) .error {
+        display: block;
+    }   
 
 
     .form-group{
@@ -245,7 +337,8 @@
         color: var(--clr-brown-dark);
     }
 
-    .form-bottom > :last-child{
+    .form-actions{
+            font-size: var(--font-s-small);
             flex: 1;
             display: flex;
             gap: 1em;
@@ -253,16 +346,17 @@
                 flex: 1;
             }
         }
-    
-    .form-bottom > div + div > div {
-        font-size: var(--font-s-small);
+
+    .login-hint > a{
+        display: block;
     }
+
 
     .consent{
         display: block;
         font-size: var(--font-s-small);
         
-        height: 2.2em;
+        min-height: 2lh; 
     }
 
     button{
@@ -275,11 +369,10 @@
         border: 0;
     }
 
-    a{
+    a {
         text-decoration: none;
         font-weight: 400;
         color: var(--clr-brown);
-        cursor: cell;
     }
     
 
@@ -297,4 +390,18 @@
             border-left: 0;
         }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+    .github-page > svg {
+        animation: none;
+    }
+    .password-hints,
+    label {
+        transition: none;
+    }
+    #logo {
+        animation: none;
+        stroke-dashoffset: 0;
+    }
+}
 
